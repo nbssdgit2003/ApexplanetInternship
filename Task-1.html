@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+
+<head>
+    
+    <title>Web development</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Georgia', serif;
+            background: linear-gradient(to right, #e0f7ef, #c8e6c9);
+            color: #2e4d3c;
+        }
+
+        header {
+            background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+        }
+
+        header h1 {
+            font-size: 60px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 5px #000;
+        }
+
+        header p {
+            font-size: 22px;
+            font-style: italic;
+            text-shadow: 1px 1px 3px #000;
+        }
+
+        nav {
+            background-color: #2e7d32;
+            text-align: center;
+            padding: 12px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .section {
+            padding: 60px 30px;
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .section h2 {
+            font-size: 34px;
+            color: #1b5e20;
+            margin-bottom: 20px;
+        }
+
+        .section p {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        .quote-box {
+            background-color: #f1f8e9;
+            border-left: 5px solid #8bc34a;
+            padding: 20px;
+            margin-top: 30px;
+            font-style: italic;
+        }
+
+        .image-box {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .image-box img {
+            width: 80%;
+            max-width: 600px;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            background-color: #1b5e20;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 60px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>ApexPlanet Internship<a href="https://apexplanet.in"></a></h1>
+        <p></p>
+    </header>
+
+    <nav>
+        <a href="#welcome">Welcome Page</a>
+        <a href="#skills">Skills</a>
+        <a href="https://apexplanet.in">Visit ApexPlanet</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="section" id="welcome">
+        <h2>Welcome to MyApexPlanet Internship</h2>
+        <p>
+            Apex Planet is seeking enthusiastic and driven Management Interns to gain hands-on experience across various aspects of our organization's management functions. This internship offers a unique opportunity to work alongside experienced leaders, contribute to meaningful projects, and develop a comprehensive understanding of strategic planning, operational efficiency, team leadership, and organizational development within a dynamic and innovative environment.
+        </p>
+
+        <div class="quote-box">
+            "The only way to do great work is to love what you do." - Steve Jobs
+        </div>
+
+        <div class="image-box">
+            <img src="" alt="">
+        </div>
+       
+    </div>
+     <div class="section" id="skills">
+        <h2>Skills Required</h2>
+        <p>
+            Here are some of the skills we are looking for:
+        </p>
+        <ul>
+            <li>Strong communication and interpersonal skills</li>
+            <li>Excellent analytical and problem-solving abilities</li>
+             <li>Proficiency in MS Office Suite</li>
+            <li>Ability to work independently and as part of a team</li>
+        </ul>
+     </div><center>
+     <button id="myButton">Click Me</button></center>
+      <div class="section" id="contact">
+        <h2>Contact Us</h2>
+        <p>
+            You can reach us at:
+        </p>
+        <p>
+            Email: Apex@apexplanet.com
+        </p>
+        <p>
+            Phone: +123 456 7890
+        </p>
+     </div>
+
+
+    <footer>
+        © 2025@BhaskarInternship | Built with Html,CSS,Javascript
+    </footer>
+     <script>
+        
+        const myButton = document.getElementById("myButton");
+
+        
+        myButton.addEventListener("click", function() {
+           
+            alert("Thanks For Choosing ApexPlanet Internnship");
+        });
+        
+    </script>
+</body>
+
+</html>
