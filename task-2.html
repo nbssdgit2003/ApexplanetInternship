@@ -1,0 +1,454 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact & To-Do App</title>
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #060d14; /* Light blue background */
+            background-image: linear-gradient(135deg, #154874 0%, #e6f2ff 100%); /* Subtle gradient */
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Flexbox Navigation */
+        .nav-flex {
+            display: flex;
+            gap: 20px;
+            padding: 15px 0;
+            background-color: #ac1414;
+            justify-content: center;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .nav-flex a {
+            color: #ffffff;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            font-weight: bold;
+        }
+
+        .nav-flex a:hover {
+            background-color: #d32f2f;
+        }
+
+        /* Grid Layout */
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        /* Contact Form Styles */
+        .contact-form {
+            background: #0d8425;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            color: white;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #18a748;
+            border-radius: 4px;
+            font-size: 16px;
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .error-message {
+            color: #ffcccb;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .submit-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+            width: 100%;
+            font-weight: bold;
+        }
+
+        .submit-btn:hover {
+            background-color: #2980b9;
+        }
+
+        /* To-Do List Styles */
+        .todo-app {
+            background: #cf7d01;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            color: white;
+        }
+
+        .todo-input {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .todo-input input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #138a2d7d;
+            border-radius: 4px 0 0 4px;
+            font-size: 16px;
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        .todo-input button {
+            padding: 12px 20px;
+            background-color: #05021485;
+            color: #ffffff;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-weight: bold;
+        }
+
+        .todo-input button:hover {
+            background-color: #1a237e;
+        }
+
+        #todoList {
+            list-style: none;
+        }
+
+        #todoList li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            border-bottom: 1px solid #e65100;
+            cursor: move;
+            background-color: rgba(255, 255, 255, 0.1);
+            margin-bottom: 8px;
+            border-radius: 4px;
+            transition: transform 0.2s;
+        }
+
+        #todoList li:hover {
+            transform: translateX(5px);
+        }
+
+        #todoList li:last-child {
+            border-bottom: none;
+        }
+
+        .delete-btn {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-weight: bold;
+        }
+
+        .delete-btn:hover {
+            background-color: #c62828;
+        }
+
+        /* Header and Footer */
+        h1 {
+            color: #ac1414;
+            margin: 20px 0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            color: white;
+            margin-bottom: 20px;
+            border-bottom: 2px solid rgba(255,255,255,0.2);
+            padding-bottom: 10px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 30px;
+            border-top: 1px solid #9b2222;
+            color: #ac1414;
+            font-weight: bold;
+            background-color: rgba(255,255,255,0.8);
+            border-radius: 8px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-flex {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+            
+            body {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <center>
+                <h1>Internship ContactForm</h1>
+            </center>
+            <nav class="nav-flex">
+                <a href="#contact">Contact</a>
+                <a href="#todo">To-Do List</a>
+            </nav>
+        </header>
+
+        <br><br>
+
+            <section id="todo" class="todo-section">
+                <h2>To-Do List</h2>
+                <div class="todo-app">
+                    <div class="todo-input">
+                        <input type="text" id="todoInput" placeholder="Add a new task...">
+                        <button id="addTodoBtn">Add</button>
+                    </div>
+                    <ul id="todoList"></ul>
+                </div>
+            </section>
+        </main>
+       
+        <main class="grid-container">
+            <section id="contact" class="contact-section">
+                <center>
+                <h2>Contact Form</h2>
+                <form id="contactForm" class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" required>
+                        <span class="error-message" id="nameError"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required>
+                        <span class="error-message" id="emailError"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Message:</label>
+                        <textarea id="message" name="message" rows="4" required></textarea>
+                        <span class="error-message" id="messageError"></span>
+                    </div>
+                    
+                   
+                    <button type="submit" class="submit-btn">Send Message</button>
+             
+                </form>
+            </center>
+            </section>
+      
+
+        <footer>
+            <p>&copy;2025@Bhaskarinternship | Built with HTML CSS JAVASCRIPT</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Contact Form Validation
+            const contactForm = document.getElementById('contactForm');
+            const nameInput = document.getElementById('name');
+            const emailInput = document.getElementById('email');
+            const messageInput = document.getElementById('message');
+            
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                let isValid = true;
+                
+                // Name validation
+                if (nameInput.value.trim() === '') {
+                    showError('nameError', 'Name is required');
+                    isValid = false;
+                } else {
+                    hideError('nameError');
+                }
+                
+                // Email validation
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (emailInput.value.trim() === '') {
+                    showError('emailError', 'Email is required');
+                    isValid = false;
+                } else if (!emailRegex.test(emailInput.value)) {
+                    showError('emailError', 'Please enter a valid email');
+                    isValid = false;
+                } else {
+                    hideError('emailError');
+                }
+                
+                // Message validation
+                if (messageInput.value.trim() === '') {
+                    showError('messageError', 'Message is required');
+                    isValid = false;
+                } else {
+                    hideError('messageError');
+                }
+                
+                if (isValid) {
+                    // In a real app, you would send the form data to a server here
+                    alert('Form submitted successfully!');
+                    contactForm.reset();
+                }
+            });
+            
+            function showError(elementId, message) {
+                const errorElement = document.getElementById(elementId);
+                errorElement.textContent = message;
+                errorElement.style.display = 'block';
+            }
+            
+            function hideError(elementId) {
+                const errorElement = document.getElementById(elementId);
+                errorElement.textContent = '';
+                errorElement.style.display = 'none';
+            }
+            
+            // To-Do List Functionality
+            const todoInput = document.getElementById('todoInput');
+            const addTodoBtn = document.getElementById('addTodoBtn');
+            const todoList = document.getElementById('todoList');
+            
+            addTodoBtn.addEventListener('click', addTodo);
+            todoInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    addTodo();
+                }
+            });
+            
+            function addTodo() {
+                const todoText = todoInput.value.trim();
+                if (todoText !== '') {
+                    const li = document.createElement('li');
+                    li.draggable = true;
+                    
+                    const span = document.createElement('span');
+                    span.textContent = todoText;
+                    
+                    const deleteBtn = document.createElement('button');
+                    deleteBtn.textContent = 'Delete';
+                    deleteBtn.className = 'delete-btn';
+                    deleteBtn.addEventListener('click', function() {
+                        li.remove();
+                    });
+                    
+                    li.appendChild(span);
+                    li.appendChild(deleteBtn);
+                    todoList.appendChild(li);
+                    
+                    todoInput.value = '';
+                }
+            }
+            
+            // Drag and drop functionality for todos
+            let draggedItem = null;
+            
+            todoList.addEventListener('dragstart', function(e) {
+                if (e.target.tagName === 'LI') {
+                    draggedItem = e.target;
+                    e.dataTransfer.effectAllowed = 'move';
+                    e.dataTransfer.setData('text/html', e.target.innerHTML);
+                    e.target.style.opacity = '0.5';
+                }
+            });
+            
+            todoList.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                e.dataTransfer.dropEffect = 'move';
+            });
+            
+            todoList.addEventListener('dragenter', function(e) {
+                e.preventDefault();
+                if (e.target.tagName === 'LI') {
+                    e.target.style.backgroundColor = 'rgba(255,255,255,0.2)';
+                }
+            });
+            
+            todoList.addEventListener('dragleave', function(e) {
+                if (e.target.tagName === 'LI') {
+                    e.target.style.backgroundColor = 'rgba(255,255,255,0.1)';
+                }
+            });
+            
+            todoList.addEventListener('drop', function(e) {
+                e.preventDefault();
+                if (e.target.tagName === 'LI' && draggedItem !== e.target) {
+                    draggedItem.style.opacity = '';
+                    e.target.style.backgroundColor = 'rgba(255,255,255,0.1)';
+                    
+                    // Swap the items
+                    const nextItem = (e.clientY < e.target.getBoundingClientRect().top + e.target.offsetHeight / 2) 
+                        ? e.target 
+                        : e.target.nextElementSibling;
+                    
+                    todoList.insertBefore(draggedItem, nextItem);
+                }
+            });
+            
+            todoList.addEventListener('dragend', function(e) {
+                if (e.target.tagName === 'LI') {
+                    e.target.style.opacity = '';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
