@@ -1,0 +1,613 @@
+
+<html>
+<head>
+    
+    <title>Responsive Page</title>
+    <style>
+       
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e0f7fa; 
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #00796b;
+            color: white;
+            padding: 1.5em 0;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2.8em;
+        }
+
+        h3 {
+            color: #004d40;
+            border-bottom: 2px solid #b2dfdb; 
+            padding-bottom: 10px;
+            margin-top: 40px;
+            margin-bottom: 25px;
+            text-align: center;
+            font-size: 2em;
+        }
+
+        .project-section {
+            background-color: #ffffff;
+            margin: 30px auto;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15); 
+            max-width: 1000px; 
+            border: 1px solid #c8e6c9; 
+        }
+
+        .project-content {
+            padding: 20px;
+            background-color: #f0f4f7;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+       
+        .responsive-header {
+            background-color: #3f51b5;
+            color: white;
+            padding: 1em 0;
+            text-align: center;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .responsive-header h4 {
+            margin: 0;
+            font-size: 1.6em;
+        }
+
+        .responsive-main {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 20px;
+            gap: 20px;
+            justify-content: center;
+            background-color: #e8eaf6;
+            border-radius: 0 0 8px 8px; 
+        }
+
+        .responsive-column {
+            flex: 1;
+            min-width: 280px;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border: 1px solid #c5cae9; 
+        }
+
+        .responsive-column h5 {
+            color: #3f51b5;
+            margin-top: 0;
+        }
+
+        /* Responsive Media Queries */
+        @media screen and (max-width: 768px) {
+            .responsive-main {
+                flex-direction: column;
+                align-items: center;
+            }
+            .responsive-column {
+                width: 90%;
+                margin-bottom: 20px;
+            }
+            .responsive-header h4 {
+                font-size: 1.4em;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .responsive-column {
+                width: 95%;
+                padding: 15px;
+            }
+            .responsive-main {
+                padding: 10px;
+                gap: 10px;
+            }
+        }
+
+        /* --- Project 2: Image Carousel Styles --- */
+        .carousel-wrapper-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background-color: #e0f2f7; /* Light blue background for carousel wrapper */
+            border-radius: 8px;
+        }
+
+        .carousel-outer-container {
+            position: relative;
+            width: 600px;
+            height: 400px;
+            overflow: hidden;
+            border: 6px solid #0097a7; /* Cyan border for carousel */
+            box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+            border-radius: 10px;
+        }
+
+        .carousel-inner-images {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel-inner-images img {
+            min-width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            min-height: 400px; /* Ensure space even if image fails to load */
+            min-width: 600px; /* Ensure space even if image fails to load */
+        }
+
+        .carousel-control-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.7); /* Darker buttons */
+            color: white;
+            border: none;
+            padding: 14px 20px; /* Larger buttons */
+            cursor: pointer;
+            font-size: 2em; /* Larger font for arrows */
+            border-radius: 50%; /* Round buttons */
+            z-index: 10;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .carousel-control-btn:hover {
+            background-color: rgba(0, 0, 0, 0.9);
+            transform: translateY(-50%) scale(1.05); /* Slight scale on hover */
+        }
+
+        #carousel-prev-button {
+            left: 20px;
+        }
+
+        #carousel-next-button {
+            right: 20px;
+        }
+
+        /* --- Project 3: API Fetcher Styles --- */
+        .api-display-area {
+            padding: 30px;
+            text-align: center;
+            background-color: #fff3e0; /* Light orange background for API area */
+            border-radius: 8px;
+        }
+
+        .api-display-area h4 {
+            color: #f57c00; /* Dark orange for API header */
+            margin-bottom: 25px;
+        }
+
+        #api-joke-output {
+            min-height: 140px;
+            background-color: #ffffff; /* White background for joke output */
+            border: 1px solid #ffcc80; /* Lighter orange border */
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        #api-joke-setup {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #34495e;
+        }
+
+        #api-joke-delivery {
+            font-size: 1.2em;
+            font-style: italic;
+            color: #7f8c8d;
+        }
+
+        #api-fetch-joke-button {
+            background-color: #ff9800; /* Orange button */
+            color: white;
+            border: none;
+            padding: 15px 35px; /* Larger button */
+            font-size: 1.3em;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        #api-fetch-joke-button:hover {
+            background-color: #f57c00; /* Darker orange on hover */
+            transform: translateY(-2px); /* Slight lift on hover */
+        }
+
+        #api-error-message {
+            margin-top: 20px;
+            font-weight: bold;
+            color: #d32f2f; /* Darker red for error messages */
+        }
+
+        /* --- Project 4: Interactive Quiz Styles --- */
+        .quiz-container-wrapper {
+            padding: 30px;
+            text-align: center;
+            background-color: #e8f5e9; /* Light green background for quiz area */
+            border-radius: 8px;
+        }
+
+        .quiz-container-wrapper h4 {
+            color: #2e7d32; /* Dark green for quiz header */
+            margin-bottom: 25px;
+        }
+
+        #quiz-display {
+            background-color: #ffffff;
+            border: 1px solid #a5d6a7; /* Lighter green border */
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            text-align: left; /* Align quiz content left */
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        #quiz-question {
+            font-size: 1.4em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #424242;
+        }
+
+        .quiz-options label {
+            display: block; /* Each option on new line */
+            margin-bottom: 10px;
+            font-size: 1.1em;
+            cursor: pointer;
+        }
+
+        .quiz-options input[type="radio"] {
+            margin-right: 10px;
+            transform: scale(1.2); /* Slightly larger radio buttons */
+        }
+
+        #quiz-submit-btn {
+            background-color: #4caf50; /* Green submit button */
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1.2em;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        #quiz-submit-btn:hover {
+            background-color: #388e3c; /* Darker green on hover */
+            transform: translateY(-2px);
+        }
+
+        #quiz-result {
+            margin-top: 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #1b5e20; /* Dark green for result */
+        }
+
+        #quiz-score {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-top: 15px;
+            color: #00796b;
+        }
+
+        footer {
+            background-color: #004d40; /* Dark teal footer */
+            color: white;
+            text-align: center;
+            padding: 1.5em 0;
+            margin-top: 40px;
+            box-shadow: 0 -4px 8px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>My Integrated Web Development</h1>
+        <p>A Showcase of Responsive Design, Interactive Carousel, API Fetching, and an Interactive Quiz!</p>
+    </header>
+
+    <div class="project-section">
+        <h3>Responsive Web Page Demo</h3>
+        <div class="project-content">
+            <div class="responsive-header">
+                <h4>Dynamic Layout on Different Devices</h4>
+            </div>
+            <div class="responsive-main">
+                <div class="responsive-column">
+                    <h5>Adaptive Content Block</h5>
+                    <p>This content block adjusts its width and stacking behavior. Resize your browser window to see it in action on various screen sizes!</p>
+                </div>
+                <div class="responsive-column">
+                    <h5>Mobile-First Approach</h5>
+                    <p>On smaller screens (e.g., smartphones, tablets), these columns transition from a side-by-side layout to a stacked vertical arrangement for better readability.</p>
+                </div>
+                <div class="responsive-column">
+                    <h5>Optimized User Experience</h5>
+                    <p>Media queries are the key to ensuring your website provides a seamless and visually appealing experience, whether on a tiny phone or a large desktop monitor.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="project-section">
+        <h3>Interactive Image Carousel</h3>
+        <div class="project-content">
+            <div class="carousel-wrapper-container">
+                <div class="carousel-outer-container">
+                    <div class="carousel-inner-images" id="carousel-inner-images">
+                        <img src="https://picsum.photos/id/1018/600/400" alt="A lake with mountains in the background">
+                        <img src="https://picsum.photos/id/1015/600/400" alt="A desert landscape with a single road">
+                        <img src="https://picsum.photos/id/1025/600/400" alt="A close-up of a pug dog">
+                        <img src="https://picsum.photos/id/1020/600/400" alt="A vibrant city skyline at sunset">
+                    </div>
+                    <button class="carousel-control-btn" id="carousel-prev-button">&lt;</button>
+                    <button class="carousel-control-btn" id="carousel-next-button">&gt;</button>
+                </div>
+            </div>
+            <p style="text-align: center; margin-top: 15px;">Click the arrows to navigate through the images.</p>
+        </div>
+    </div>
+
+    <div class="project-section">
+        <h3>Fetch Data from an API (Random Joke Generator)</h3>
+        <div class="project-content">
+            <div class="api-display-area">
+                <h4>Get a Fresh, Random Joke!</h4>
+                <div id="api-joke-output">
+                    <p id="api-joke-setup">Click "Get New Joke" to fetch a joke!</p>
+                    <p id="api-joke-delivery"></p>
+                </div>
+                <button id="api-fetch-joke-button">Get New Joke</button>
+                <p id="api-error-message"></p>
+            </div>
+            <p style="text-align: center; margin-top: 15px; font-size: 0.9em; color: #666;">Jokes fetched from JokeAPI (v2).</p>
+        </div>
+    </div>
+
+    <div class="project-section">
+        <h3>Interactive Quiz</h3>
+        <div class="project-content">
+            <div class="quiz-container-wrapper">
+                <h4>Test Your Knowledge! (5 Marks)</h4>
+                <div id="quiz-display">
+                    <p id="quiz-question"></p>
+                    <div class="quiz-options" id="quiz-options">
+                        </div>
+                    <button id="quiz-submit-btn">Submit Answer</button>
+                    <p id="quiz-result"></p>
+                    <p id="quiz-score"></p>
+                </div>
+            </div>
+            <p style="text-align: center; margin-top: 15px; font-size: 0.9em; color: #666;">A simple quiz to demonstrate JavaScript interactivity.</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>@bhaskar 2025 Developed with HTML, CSS, and JavaScript</p>
+    </footer>
+
+    <script>
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            const carouselImages = document.getElementById('carousel-inner-images');
+            const images = carouselImages.querySelectorAll('img');
+            const prevBtn = document.getElementById('carousel-prev-button');
+            const nextBtn = document.getElementById('carousel-next-button');
+
+            let currentIndex = 0;
+            const totalImages = images.length;
+
+            function updateCarousel() {
+                carouselImages.style.transform = `translateX(${-currentIndex * 100}%)`;
+            }
+
+            nextBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex + 1) % totalImages;
+                updateCarousel();
+            });
+
+            prevBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+                updateCarousel();
+            });
+
+            updateCarousel(); // Initialize carousel position
+        });
+
+        // --- Project 3: API Fetcher JavaScript ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const fetchJokeBtn = document.getElementById('api-fetch-joke-button');
+            const jokeSetup = document.getElementById('api-joke-setup');
+            const jokeDelivery = document.getElementById('api-joke-delivery');
+            const errorMessage = document.getElementById('api-error-message');
+
+            const JOKE_API_URL = 'https://v2.jokeapi.dev/joke/Any?blacklistFlags=racist,sexist,explicit&type=twopart';
+
+            async function fetchJoke() {
+                jokeSetup.textContent = 'Fetching a hilarious joke...';
+                jokeDelivery.textContent = '';
+                errorMessage.textContent = '';
+
+                try {
+                    const response = await fetch(JOKE_API_URL);
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    const data = await response.json();
+
+                    if (data.error) {
+                        throw new Error(`API Error: ${data.message || 'Unknown API error'}`);
+                    }
+
+                    if (data.type === 'twopart') {
+                        jokeSetup.textContent = data.setup;
+                        jokeDelivery.textContent = data.delivery;
+                    } else if (data.type === 'single') {
+                        jokeSetup.textContent = data.joke;
+                        jokeDelivery.textContent = '(One-liner!)';
+                    } else {
+                        throw new Error('Received unexpected joke format from API.');
+                    }
+                } catch (error) {
+                    console.error('Failed to fetch joke:', error);
+                    jokeSetup.textContent = 'Failed to fetch a joke.';
+                    jokeDelivery.textContent = 'Please check your internet connection or try again later.';
+                    errorMessage.textContent = `Error: ${error.message}`;
+                }
+            }
+
+            fetchJokeBtn.addEventListener('click', fetchJoke);
+            fetchJoke(); // Fetch a joke on initial load
+        });
+
+        // --- Project 4: Interactive Quiz JavaScript (now 5 questions) ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const quizQuestions = [
+                {
+                    question: "What does HTML stand for?",
+                    options: ["Hyper Text Markup Language", "Hyperlink and Text Markup Language", "Home Tool Markup Language", "Hyper Transfer Markup Language"],
+                    correctAnswer: "Hyper Text Markup Language"
+                },
+                {
+                    question: "Which CSS property is used to control the spacing *outside* an element's border?",
+                    options: ["padding", "margin", "spacing", "border-spacing"],
+                    correctAnswer: "margin"
+                },
+                {
+                    question: "What keyword is primarily used to declare a *constant* variable in JavaScript?",
+                    options: ["var", "let", "const", "static"],
+                    correctAnswer: "const"
+                },
+                {
+                    question: "What is the correct HTML element for the largest heading?",
+                    options: ["<head>", "<heading>", "<h1>", "<h6>"],
+                    correctAnswer: "<h1>"
+                },
+                {
+                    question: "Which JavaScript method is used to write directly to the HTML document output stream?",
+                    options: ["console.log()", "document.write()", "alert()", "innerHTML()"],
+                    correctAnswer: "document.write()"
+                }
+            ];
+
+            const quizQuestionEl = document.getElementById('quiz-question');
+            const quizOptionsEl = document.getElementById('quiz-options');
+            const quizSubmitBtn = document.getElementById('quiz-submit-btn');
+            const quizResultEl = document.getElementById('quiz-result');
+            const quizScoreEl = document.getElementById('quiz-score');
+
+            let currentQuestionIndex = 0;
+            let score = 0;
+
+            function loadQuestion() {
+                quizResultEl.textContent = ''; // Clear previous result
+                const questionData = quizQuestions[currentQuestionIndex];
+                quizQuestionEl.textContent = `Question ${currentQuestionIndex + 1}/${quizQuestions.length}: ${questionData.question}`;
+                quizOptionsEl.innerHTML = ''; // Clear previous options
+
+                questionData.options.forEach((option, index) => {
+                    const label = document.createElement('label');
+                    const input = document.createElement('input');
+                    input.type = 'radio';
+                    input.name = 'quizOption'; // Same name for all radios in a question
+                    input.value = option;
+                    label.appendChild(input);
+                    label.appendChild(document.createTextNode(option));
+                    quizOptionsEl.appendChild(label);
+                });
+
+                quizSubmitBtn.textContent = 'Submit Answer';
+                if (currentQuestionIndex === quizQuestions.length - 1) {
+                    quizSubmitBtn.textContent = 'Finish Quiz';
+                }
+                quizScoreEl.textContent = `Score: ${score} / ${quizQuestions.length}`; // Update score on new question load
+            }
+
+            function checkAnswer() {
+                const selectedOption = document.querySelector('input[name="quizOption"]:checked');
+                if (!selectedOption) {
+                    quizResultEl.textContent = 'Please select an answer!';
+                    quizResultEl.style.color = '#d32f2f'; // Red color for warning
+                    return;
+                }
+
+                const userAnswer = selectedOption.value;
+                const correctAnswer = quizQuestions[currentQuestionIndex].correctAnswer;
+
+                if (userAnswer === correctAnswer) {
+                    score++;
+                    quizResultEl.textContent = 'Correct!';
+                    quizResultEl.style.color = '#2e7d32'; // Green for correct
+                } else {
+                    quizResultEl.textContent = `Wrong! Correct answer was: ${correctAnswer}`;
+                    quizResultEl.style.color = '#d32f2f'; // Red for wrong
+                }
+
+                quizScoreEl.textContent = `Score: ${score} / ${quizQuestions.length}`;
+
+                // Disable options after answer
+                quizOptionsEl.querySelectorAll('input[type="radio"]').forEach(radio => radio.disabled = true);
+
+                if (currentQuestionIndex < quizQuestions.length - 1) {
+                    quizSubmitBtn.textContent = 'Next Question';
+                    quizSubmitBtn.onclick = nextQuestion; // Change button action for next question
+                } else {
+                    quizSubmitBtn.textContent = 'View Final Score'; // Final button text
+                    quizSubmitBtn.onclick = showFinalScore; // Change action to show final score
+                }
+            }
+
+            function nextQuestion() {
+                currentQuestionIndex++;
+                if (currentQuestionIndex < quizQuestions.length) {
+                    loadQuestion();
+                    quizSubmitBtn.onclick = checkAnswer; // Reset button action for checking answer
+                } else {
+                    // This case should ideally not be reached if showFinalScore is called correctly
+                    showFinalScore();
+                }
+            }
+
+            function showFinalScore() {
+                quizQuestionEl.textContent = 'Quiz Finished!';
+                quizOptionsEl.innerHTML = ''; // Clear options
+                quizResultEl.textContent = `Your final score is ${score} out of ${quizQuestions.length}!`;
+                quizResultEl.style.color = '#00796b'; // Teal for final score message
+                quizScoreEl.textContent = ``; // Clear score display
+                quizSubmitBtn.style.display = 'none'; // Hide submit button
+            }
+
+            quizSubmitBtn.addEventListener('click', checkAnswer); // Initial button action
+            loadQuestion(); // Load the first question
+        });
+    </script>
+</body>
+</html>
