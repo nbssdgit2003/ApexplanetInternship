@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Complete Web Project</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      background: #673ab7; /* Deep Purple */
+      color: white;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    nav a {
+      color: white;
+      margin: 0 1rem;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    main {
+      flex: 1;
+      padding: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: start;
+    }
+
+    section {
+      display: none;
+      max-width: 900px;
+      width: 100%;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.1);
+    }
+
+    section.active {
+      display: block;
+    }
+
+    input, button, select {
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    h2 {
+      margin-bottom: 1rem;
+      color: #4a148c; /* Even Deeper Purple */
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    ul li {
+      margin: 0.5rem 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem;
+      background-color: #f3e5f5; /* Light Purple */
+      border-radius: 6px;
+    }
+
+    ul li button {
+      margin-left: 1rem;
+      background: #ef5350; /* Red */
+      color: white;
+      border: none;
+      padding: 0.3rem 0.6rem;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    ul li button:hover {
+      background: #c62828; /* Darker Red */
+    }
+
+    #productList {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    #productList div {
+      background: #e8f5e9; /* Light Green */
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    }
+
+    footer {
+      background: #4527a0; /* Darker Purple */
+      color: white;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    /* Different page backgrounds */
+    #about    { background-color: #f3e5f5; /* Light Purple */ }
+    #projects { background-color: #e0f2f7; /* Lighter Blue */ }
+    #todo     { background-color: #fffde7; /* Creamy Yellow */ }
+    #products { background-color: #e8f5e9; /* Light Green */ }
+    #contact  { background-color: #e3f2fd; /* Pale Blue */ }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>MY PORTFOLIO</h1>
+    <nav>
+      <a onclick="showPage('about')">About Me</a>
+      <a onclick="showPage('projects')">Projects</a>
+      <a onclick="showPage('todo')">To-Do App</a>
+      <a onclick="showPage('products')">Product Page</a>
+      <a onclick="showPage('contact')">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="about" class="active">
+      <h2>About Me</h2>
+      <p>Hello! I'm NARALA BHASKARA SAI SIVA DURGA currently pursuing Masters of computer applications in Aditya University.
+        With a strong passion for web development I enjoy creating responsive, user-friendly websites using HTML, CSS, and JavaScript. I am constantly learning new technologies and frameworks to improve my skills. My goal is to become a full-stack developer and build impactful digital solutions that make life easier and more connected.</p>
+    </section>
+
+    <section id="projects">
+      <h2>My Projects</h2>
+      <ul>
+        <li>Simple Webpage using HTML, CSS, and JavaScript</li>
+        <li>Contact Form with Validation and Responsive Layout</li>
+        <li>Interactive Quiz / Image Carousel and API Data Fetching</li>
+        <li>Personal Portfolio Website</li>
+        <li>To-Do List App with Local Storage</li>
+        <li>Product Filter and Sort Page</li>
+      </ul>
+    </section>
+
+    <section id="todo">
+      <h2>To-Do List</h2>
+      <input type="text" id="taskInput" placeholder="Enter task" />
+      <button onclick="addTask()">Add Task</button>
+      <ul id="taskList"></ul>
+    </section>
+
+    <section id="products">
+      <h2>Products</h2>
+      <select id="filterCategory">
+        <option value="">All Categories</option>
+        <option value="electronics">Electronics</option>
+        <option value="fashion">Fashion</option>
+        <option value="groceries">Groceries</option>
+        <option value="decor">Home Decor</option>
+        <option value="accessories">Accessories</option>
+        <option value="books">Books</option>
+      </select>
+
+      <select id="sortBy">
+        <option value="default">Sort by</option>
+        <option value="price">Price</option>
+        <option value="rating">Rating</option>
+      </select>
+
+      <div id="productList"></div>
+    </section>
+
+    <section id="contact">
+      <h2>Contact Me</h2>
+      <p><strong>Email:</strong> <a href="naralabhaskar2003@gmail.com">naralabhaskar2003@gmail.com</a>
+</p>
+      <p><strong>Phone:</strong> +91-1234567890 </p>
+      <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/bhaskara-sai-siva-durga-narala-2057a3247" target="_blank">linkedin.com/in/bhaskara-sai-siva-durga-narala-2057a3247</a></p>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 @bhaskar. All rights reserved.
+  </footer>
+
+  <script>
+    // Navigation
+    function showPage(pageId) {
+      document.querySelectorAll("section").forEach(sec => {
+        sec.classList.remove("active");
+      });
+      document.getElementById(pageId).classList.add("active");
+    }
+
+    // To-Do List
+    const taskInput = document.getElementById("taskInput");
+    const taskList = document.getElementById("taskList");
+
+    function loadTasks() {
+      const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+      taskList.innerHTML = "";
+      tasks.forEach((task, index) => {
+        const li = document.createElement("li");
+        li.textContent = task;
+        const removeBtn = document.createElement("button");
+        removeBtn.textContent = "Remove";
+        removeBtn.onclick = () => removeTask(index);
+        li.appendChild(removeBtn);
+        taskList.appendChild(li);
+      });
+    }
+
+    function addTask() {
+      const task = taskInput.value.trim();
+      if (task) {
+        const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+        tasks.push(task);
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+        taskInput.value = "";
+        loadTasks();
+      }
+    }
+
+    function removeTask(index) {
+      const tasks = JSON.parse(localStorage.getItem("tasks"));
+      tasks.splice(index, 1);
+      localStorage.setItem("tasks", JSON.stringify(tasks));
+      loadTasks();
+    }
+
+    // Product List
+    const products = [
+      { name: "Quantum Smartwatch", category: "electronics", price: 32000, rating: 4.6 },
+      { name: "Aurora Laptop Pro", category: "electronics", price: 85000, rating: 4.9 },
+      { name: "Sonic Bluetooth Buds", category: "electronics", price: 2500, rating: 4.4 },
+      { name: "Chrono Drone X1", category: "electronics", price: 15000, rating: 4.7 },
+
+      { name: "Voyager Denim Jacket", category: "fashion", price: 2500, rating: 4.2 },
+      { name: "Urban Comfort Sneakers", category: "fashion", price: 4000, rating: 4.3 },
+      { name: "Silken Scarf Collection", category: "fashion", price: 800, rating: 4.0 },
+      { name: "Eco-Friendly T-Shirt", category: "fashion", price: 950, rating: 4.1 },
+
+      { name: "Organic Basmati Rice (5kg)", category: "groceries", price: 450, rating: 4.7 },
+      { name: "Artisan Coffee Blend", category: "groceries", price: 300, rating: 4.6 },
+      { name: "Fresh Orchard Apples (1kg)", category: "groceries", price: 180, rating: 4.8 },
+      { name: "Whole Grain Bread", category: "groceries", price: 70, rating: 4.3 },
+
+      { name: "Zen Garden Kit", category: "decor", price: 1800, rating: 4.5 },
+      { name: "Bohemian Tapestry", category: "decor", price: 2800, rating: 4.2 },
+      { name: "Abstract Ceramic Vase", category: "decor", price: 1000, rating: 4.0 },
+      { name: "LED String Lights (10m)", category: "decor", price: 600, rating: 4.1 },
+
+      { name: "Minimalist Leather Wallet", category: "accessories", price: 1500, rating: 4.4 },
+      { name: "Crystal Pendant Necklace", category: "accessories", price: 3000, rating: 4.7 },
+      { name: "Polarized Sunglasses", category: "accessories", price: 1200, rating: 4.3 },
+      { name: "Vintage Pocket Watch", category: "accessories", price: 2000, rating: 4.5 },
+
+      { name: "The Alchemist (Paperback)", category: "books", price: 350, rating: 4.8 },
+      { name: "Data Science Handbook", category: "books", price: 900, rating: 4.6 },
+      { name: "Sci-Fi Anthology Vol. 1", category: "books", price: 400, rating: 4.5 },
+      { name: "Gardening for Beginners", category: "books", price: 250, rating: 4.2 },
+    ];
+
+    const filterCategory = document.getElementById("filterCategory");
+    const sortBy = document.getElementById("sortBy");
+    const productList = document.getElementById("productList");
+
+    function displayProducts(data) {
+      productList.innerHTML = data.map(p => `
+        <div>
+          <h3>${p.name}</h3>
+          <p>Category: ${p.category}</p>
+          <p>Price: ₹${p.price}</p>
+          <p>Rating: ${p.rating}</p>
+        </div>
+      `).join("");
+    }
+
+    function applyFilters() {
+      let filtered = [...products];
+      const category = filterCategory.value;
+      const sort = sortBy.value;
+
+      if (category) {
+        filtered = filtered.filter(p => p.category === category);
+      }
+
+      if (sort === "price") {
+        filtered.sort((a, b) => a.price - b.price);
+      } else if (sort === "rating") {
+        filtered.sort((a, b) => b.rating - a.rating);
+      }
+
+      displayProducts(filtered);
+    }
+
+    filterCategory.onchange = applyFilters;
+    sortBy.onchange = applyFilters;
+
+    // Init
+    window.onload = function () {
+      loadTasks();
+      displayProducts(products);
+    };
+  </script>
+</body>
+</html>
